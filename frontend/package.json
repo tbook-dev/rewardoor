@@ -1,0 +1,45 @@
+{
+  "name": "rewardoor-fe",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@ant-design/cssinjs": "^1.2.0",
+    "@ant-design/icons": "^4.8.0",
+    "@ant-design/plots": "^1.2.3",
+    "@reduxjs/toolkit": "^1.9.1",
+    "@tailwindcss/forms": "^0.5.2",
+    "@walletconnect/ethereum-provider": "^2.4.0",
+    "@web3mq/client": "^1.0.7",
+    "@web3mq/react-components": "^1.0.13",
+    "ahooks": "^3.7.3",
+    "alchemy-sdk": "^2.4.3",
+    "antd": "^5.0.7",
+    "chart.js": "^3.8.0",
+    "chartjs-adapter-moment": "^1.0.0",
+    "clsx": "^1.2.1",
+    "dayjs": "^1.11.7",
+    "lodash": "^4.17.21",
+    "path-to-regexp": "^6.2.1",
+    "rc-motion": "^2.6.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.3.0",
+    "rollup": "2.79.1",
+    "tslib": "^2.4.1",
+    "tweetnacl": "^1.0.3",
+    "wagmi": "^0.11.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^2.0.0",
+    "autoprefixer": "^10.4.7",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.1.6",
+    "vite": "^3.0.0",
+    "vite-plugin-mock": "^2.9.6"
+  }
+}

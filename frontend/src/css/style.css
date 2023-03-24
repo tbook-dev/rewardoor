@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=fallback');
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+
+
+@import 'tailwindcss/utilities';
+
+:root {
+    font-family: 'Roboto', sans-serif;
+}
+.swiper-wrapper{
+    align-items: center;
+}
+.swiper-slide{
+    cursor: pointer;
+}
+.text-colorful{
+    background: linear-gradient(283.69deg, #0049FF -14.58%, #D645ED 134.55%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+
+.button-colorful{
+    background-image: linear-gradient(283.69deg, #0049FF -14.58%, #D645ED 134.55%) !important;
+    color: #fff !important;
+}
+
+.border-colorful{
+    border: 2px solid;
+    border-image-source: linear-gradient(283.69deg, #0049FF -14.58%, #D645ED 134.55%);
+}
