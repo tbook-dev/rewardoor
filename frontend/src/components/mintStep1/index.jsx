@@ -1,5 +1,6 @@
 import { Form, Select, Button } from "antd";
-import { formItemCol } from '../conf'
+import { formItemCol } from "../conf";
+import Image from "../image";
 
 const options = [
   {
@@ -16,15 +17,14 @@ const options = [
 
 export default function ({ twUrl, onMint }) {
   const [form] = Form.useForm();
-
   return (
     <div>
       <div className="shadow-[1px_1px_10px_rgba(0, 0, 0, 0.1)] mb-10 rounded-lg overflow-hidden">
-        {twUrl && <img src={twUrl} className="w-full" />}
+        <Image src={twUrl} className="w-full" />
       </div>
 
       <div>
-        <h2 className="text-3xl mb-2">NFT Fragments</h2>
+        <h2 className="mb-2 text-3xl">NFT Fragments</h2>
         <Form
           {...formItemCol}
           form={form}
