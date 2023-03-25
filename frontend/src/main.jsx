@@ -12,6 +12,23 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Router>
       <ConfigProvider
         theme={{
+          components: {
+            Form: {
+              marginLG: 12,
+            },
+            DatePicker: {
+              controlHeight: 40,
+            },
+            Input: {
+              controlHeight: 40,
+            },
+            InputNumber: {
+              controlHeight: 40,
+            },
+            Select: {
+              controlHeight: 40,
+            },
+          },
           token: {
             colorPrimary: "#0049FF",
             colorText: "#666",

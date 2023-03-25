@@ -14,6 +14,25 @@ const settings = {
 
 const alchemy = new Alchemy(settings);
 
+const saveToLs = (list) => {
+  // console.log(list);
+  const nftId_list = list
+    .map((v) => {
+      const id = Number(v.tokenId);
+      return `nftId_${id}`;
+    })
+    .join(",");
+  localStorage.setItem("nftId_list", JSON.stringify(nftId_list));
+  list.forEach((v) => {
+    const id = Number(v.tokenId);
+    const twId = v.rawMetadata?.attributes?.find((v) => v.traitType === "twit_id")?.value;
+    const twUrl = v.rawMetadata?.image;
+    const contract = v.contract?.address;
+    const opensea = `https://testnets.opensea.io/assets/mumbai/${contract}/${id}`;
+    localStorage.setItem(`nftId_${id}`, JSON.stringify({ twUrl, opensea, contract, twId, nftId: id }));
+  });
+};
+
 // Get all outbound transfers for a provided address
 
 // Get all the NFTs owned by an address
@@ -83,7 +102,8 @@ export const createIncentive = async function (values) {
   return request.PostFormV1(`${host}/addMapping`, values);
 };
 
-export const getGrantInfo = async function (nftId) {
+export const getGrantInfo = async function (nftId, address) {
+  await getUserNft(address);
   return JSON.parse(localStorage.getItem(`nftId_${nftId}`));
 };
 
@@ -91,13 +111,18 @@ export const getTop10 = async function (twId, address) {
   return request.Get(`${host}/getIncentiveIds?twitterId=${twId}&fragmentsNum=100&address=${address}`);
 };
 
-export const getUserNft = async (address = "0x3BEfF95bBB844015372075AaE6fE8Ff1E0DE5d27") => {
-  const res = await alchemy.nft.getMintedNfts("0x3BEfF95bBB844015372075AaE6fE8Ff1E0DE5d27", {
+// '0x3BEfF95bBB844015372075AaE6fE8Ff1E0DE5d27'
+export const getUserNft = async (address) => {
+  if (!address) {
+    return [];
+  }
+  const res = await alchemy.nft.getNftsForOwner(address, {
     contractAddresses: [contractAddresses],
   });
   console.log({ res, address });
-  if (Array.isArray(res.nfts)) {
-    return res.nfts;
+  if (Array.isArray(res.ownedNfts)) {
+    saveToLs(res.ownedNfts);
+    return res.ownedNfts;
   } else {
     return [];
   }

@@ -3,9 +3,13 @@ import UserMenu from "@/components/DropdownProfile";
 import { useSelector } from "react-redux";
 import Connect from "@/components/connect";
 import logo from "@/images/icon/logo.svg";
+import { useResponsive } from "ahooks";
 import { Link, NavLink } from "react-router-dom";
 import { Spin, Drawer, Input } from "antd";
 import clsx from "clsx";
+import { chains } from "@/utils/const";
+import useCurrentProject from "@/hooks/useCurrentProject";
+import SwitchNet from "@/components/connect/switchV0";
 import { match } from "path-to-regexp";
 import { useNavigate, useLocation } from "react-router-dom";
 import { twOrigin, pathPatern } from "@/components/conf";
@@ -19,10 +23,17 @@ function Header() {
   const [inputVal, setInputVal] = useState("");
   const { address, isConnected } = useAccount();
 
+  const project = useCurrentProject();
+  const projectChain = chains.find((v) => project.chain === v.name);
   const loadingUserStatus = useSelector((state) => state.user.loadingUserStatus);
   const location = useLocation();
   // console.log({address, isConnected})
   const headerTransparent = ["/built"].includes(location.pathname);
+
+  // console.log({loadingUserStatus, authUser})
+
+  // console.log('loadingUserStatus->',loadingUserStatus)
+  const { pc } = useResponsive();
 
   const handleChange = (evt) => {
     const val = evt.target.value;
@@ -69,6 +80,7 @@ function Header() {
             </div>
           </div>
 
+          {/* Header: Right side */}
           <div className="flex items-center space-x-3">
             {loadingUserStatus ? <Spin /> : isConnected ? <UserMenu align="right" /> : <Connect />}
           </div>

@@ -10,6 +10,7 @@ import { message, Spin } from "antd";
 import { errMsg } from "@/utils/const";
 import { twOrigin } from "@/components/conf";
 import { useAccount } from "wagmi";
+import { useSelector } from "react-redux";
 
 export default function () {
   const { twId, username } = useParams();
@@ -17,14 +18,28 @@ export default function () {
   const [twUrl, setTwUrl] = useState(null);
   const [createLoading, setCreateLoading] = useState(false);
   const { address } = useAccount();
+  const twNamer = useSelector((state) => state.user.user?.userName);
 
   const formValues = useRef();
   const navigate = useNavigate();
 
-  //   console.log({ twId });
+  // console.log({ twNamer, username, step });
+
   useEffect(() => {
-    setStep(1);
-  }, [window.location]);
+    if (twNamer && username && twNamer !== username) {
+      setStep(0);
+    } else {
+      setStep(1);
+    }
+
+    if (!twNamer) {
+      navigate("/built");
+    }
+  }, [window.location, twNamer, username]);
+
+  // useEffect(() => {
+  //   setStep(1);
+  // }, [window.location]);
 
   useAsyncEffect(async () => {
     const url = await getTwImg(`${twOrigin}/${username}/status/${twId}`);
@@ -62,19 +77,11 @@ export default function () {
       const res = await createIncentive({ twitId: twId, address });
       if (res.opensea) {
         try {
-          localStorage.setItem(
-            `nftId_${res.nftId}`,
-            JSON.stringify({ ...res, twUrl, twId, nftId: res.nftId })
-          );
+          localStorage.setItem(`nftId_${res.nftId}`, JSON.stringify({ ...res, twUrl, twId, nftId: res.nftId }));
 
           const list =
-            localStorage.getItem('nftId_list') === null
-              ? []
-              : JSON.parse(localStorage.getItem('nftId_list'));
-          localStorage.setItem(
-            `nftId_list`,
-            JSON.stringify([...list, `nftId_${res.nftId}`])
-          );
+            localStorage.getItem("nftId_list") === null ? [] : JSON.parse(localStorage.getItem("nftId_list"));
+          localStorage.setItem(`nftId_list`, JSON.stringify([...list, `nftId_${res.nftId}`]));
         } catch (error) {
           console.log(error);
         }
@@ -89,12 +96,9 @@ export default function () {
     setCreateLoading(true);
   };
 
-  return !twUrl ? (
-    <div className="w-[705px] mx-auto h-full flex justify-center items-center">
-      <Spin />
-    </div>
-  ) : (
+  return (
     <div className="w-[705px] mx-auto">
+      {step === 0 && <p>you can only mint your own twitter</p>}
       {step === 1 && <MintStep1 twUrl={twUrl} onMint={handleMintStep1} />}
       {step === 2 && <MintStep2 twUrl={twUrl} onMint={handleMintStep2} />}
       {step === 3 && (
