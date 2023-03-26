@@ -102,9 +102,7 @@ export default function () {
         {grantInfo ? (
           <div>
             <span className="text-colorful text-[42px] font-extrabold">Rewardoor</span>
-            <p className="text-[#999] font-bold text-sm mb-4">
-              View the contribution according to the mechanism you set.
-            </p>
+            <p className="text-[#999] font-bold text-sm mb-4">View authentic contributions.</p>
             <div>
               <div className="mb-10">
                 <h3 className="text-[#333] mb-8 font-bold text-[12px]">Creator</h3>
