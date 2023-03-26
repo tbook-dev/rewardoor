@@ -30,12 +30,10 @@ export default function () {
       <div className="mb-10">
         <h2 className="text-4xl text-[#333] font-bold mb-2 flex items-center">
           <span className="text-colorful">Mint Tweets</span>
-          <TwitterOutlined
-            style={{ color: "#1DA1F2", marginLeft: 10, marginRight: 10 }}
-          />
+          <TwitterOutlined style={{ color: "#1DA1F2", marginLeft: 10, marginRight: 10 }} />
           {authUser && useStroe?.userName && <span>@{useStroe?.userName}</span>}
         </h2>
-        <h3 className="text-base text-[#999]">CREATED AND BUILT BY YOU</h3>
+        <h3 className="text-base text-[#999]">Unlock the power of authentic social impact</h3>
       </div>
 
       <Input placeholder="Tweet url" onChange={handleChange} />

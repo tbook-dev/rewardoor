@@ -63,13 +63,3 @@ export async function changeAccountSignIn(addr, signer) {
 export async function signLoginMetaMask(addr, signer) {
   return signLogin(addr, signer, "Ethereum");
 }
-
-export async function loginSui(wallet) {
-  const signer = {
-    signMessage: (message) =>
-      wallet.signMessage({
-        message: new TextEncoder().encode(message),
-      }),
-  };
-  return signLogin(wallet.account.address, signer, "Sui", wallet.account.publicKey.toString("hex"));
-}

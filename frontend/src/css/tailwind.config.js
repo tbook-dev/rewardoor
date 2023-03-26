@@ -13,8 +13,7 @@ module.exports = {
         c1: "radial-gradient(66.68% 50.5% at 50% 119.25%, #FBBF24 0%, #FFFBEC 100%)",
       },
       boxShadow: {
-        DEFAULT:
-          "0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.02)",
+        DEFAULT: "0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.02)",
         md: "0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.02)",
         lg: "0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.01)",
         xl: "0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.01)",
@@ -29,9 +28,10 @@ module.exports = {
         c9: "0px 2px 4px rgba(0, 0, 0, 0.04)",
         c10: "0px -4px 20px rgba(0, 0, 0, 0.1)",
         c11: "0px 2px 6px rgba(0, 0, 0, 0.04)",
-        c12: '0px 2px 10px rgba(0, 0, 0, 0.08)',
-        c13: '1px 2px 10px rgba(0, 0, 0, 0.08)',
-        c14: '0px 20px 24px rgba(153, 155, 168, 0.18)'
+        c12: "0px 2px 10px rgba(0, 0, 0, 0.08)",
+        c13: "1px 2px 10px rgba(0, 0, 0, 0.08)",
+        c14: "0px 20px 24px rgba(153, 155, 168, 0.18)",
+        c2: "0px 0px 6px rgba(0, 0, 0, 0.1)",
       },
       outline: {
         blue: "2px solid rgba(0, 112, 244, 0.5)",
@@ -40,7 +40,7 @@ module.exports = {
         roboto: ["Roboto", "sans-serif"],
       },
       fontSize: {
-        xxs: ["11px", { lineHeight: '30px', "transform-origin-x": 0, "transform": 'scale(0.9)'}],
+        xxs: ["11px", { lineHeight: "30px", "transform-origin-x": 0, transform: "scale(0.9)" }],
         xs: ["0.75rem", { lineHeight: "1.5" }],
         sm: ["0.875rem", { lineHeight: "1.5715" }],
         base: ["1rem", { lineHeight: "1.5", letterSpacing: "-0.01em" }],
@@ -78,12 +78,7 @@ module.exports = {
     // add custom variant for expanding sidebar
     plugin(({ addVariant, e }) => {
       addVariant("sidebar-expanded", ({ modifySelectors, separator }) => {
-        modifySelectors(
-          ({ className }) =>
-            `.sidebar-expanded .${e(
-              `sidebar-expanded${separator}${className}`
-            )}`
-        );
+        modifySelectors(({ className }) => `.sidebar-expanded .${e(`sidebar-expanded${separator}${className}`)}`);
       });
     }),
   ],

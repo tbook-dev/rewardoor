@@ -17,7 +17,7 @@ export default function ({ twUrl, onMint }) {
 
         <Form.Item wrapperCol={{ span: 24 }}>
           <Button type="primary" className="w-full mt-7 button-colorful" onClick={onMint}>
-            INCENTIVIZE SOCIAL IMPACT
+            BUIDL AN ATTRACTIVE INCENTIVE PLAN
           </Button>
         </Form.Item>
       </div>

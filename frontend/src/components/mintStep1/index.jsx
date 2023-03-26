@@ -24,7 +24,7 @@ export default function ({ twUrl, onMint }) {
       </div>
 
       <div>
-        <h2 className="mb-2 text-3xl">NFT Fragments</h2>
+        <h2 className="mb-2 font-bold text-3xl text-[#333]">Mint your promotion twit into a shareable nFT </h2>
         <Form
           {...formItemCol}
           form={form}
@@ -35,7 +35,7 @@ export default function ({ twUrl, onMint }) {
           initialValues={{ nftNum: 100 }}
           onFinish={onMint}
         >
-          <Form.Item label="Number of NFT Fragments Divided" name="nftNum">
+          <Form.Item label="NFT Fragments Amount" name="nftNum">
             <Select options={options} />
           </Form.Item>
 
