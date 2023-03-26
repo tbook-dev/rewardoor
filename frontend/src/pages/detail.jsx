@@ -102,6 +102,9 @@ export default function () {
         {grantInfo ? (
           <div>
             <span className="text-colorful text-[42px] font-extrabold">Rewardoor</span>
+            <p className="text-[#999] font-bold text-sm mb-4">
+              View the contribution according to the mechanism you set.
+            </p>
             <div>
               <div className="mb-10">
                 <h3 className="text-[#333] mb-8 font-bold text-[12px]">Creator</h3>
@@ -115,21 +118,25 @@ export default function () {
 
               <div>
                 <h3 className="inline-block text-[#333] mb-8 font-bold text-[12px] pb-[13px] border-b-2 border-[#000]">
-                  The top 10 most liked retweets
+                  The TOP 10 most viewed retweets
                 </h3>
                 <div className="space-y-6">
-                  {top10.slice(1).map((v) => {
-                    return (
-                      <Contributor
-                        key={v.userId}
-                        name={v.name}
-                        createTime={dayjs(v.commentDate).format(timeFormat)}
-                        num={v.likeCount}
-                        img={v.profileImageUrl}
-                        extral={`5/100 of #${nftId}`}
-                      />
-                    );
-                  })}
+                  {top10.slice(1).length > 0 ? (
+                    top10.slice(1).map((v) => {
+                      return (
+                        <Contributor
+                          key={v.userId}
+                          name={v.name}
+                          createTime={dayjs(v.commentDate).format(timeFormat)}
+                          num={v.likeCount}
+                          img={v.profileImageUrl}
+                          extral={`5/100 of #${nftId}`}
+                        />
+                      );
+                    })
+                  ) : (
+                    <p>no data yet, please wait!</p>
+                  )}
                 </div>
               </div>
             </div>

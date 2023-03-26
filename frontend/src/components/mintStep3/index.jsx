@@ -6,7 +6,7 @@ const { Paragraph } = Typography;
 
 const divideRulesOptions = [
   {
-    label: "The top 10 most liked retweets",
+    label: "The TOP 10 most viewed retweets",
     value: 1,
     disabled: false,
   },

@@ -1,10 +1,10 @@
 import request from "./request";
-import tw from "@/images/tw.png";
+// import tw from "@/images/tw.png";
 // import defaultAvatar from "@/images/default.png";
 import { Network, Alchemy } from "alchemy-sdk";
 import { readAttestation } from "@eth-optimism/atst";
 
-const contractAddresses = "0x965DfEac842166A67c255AAE63925098FBF0080d".toLocaleLowerCase();
+const contractAddresses = "0xc28c619CfB6263946a646F4812F8f0C164904030".toLocaleLowerCase();
 
 export const host = "https://rs-service.fly.dev";
 
@@ -101,7 +101,7 @@ export const getTwImg = async function (tweetUrl) {
     });
     return res?.image;
   } catch (error) {
-    return tw;
+    // return tw;
   }
 };
 
