@@ -33,16 +33,96 @@ function DropdownProfile() {
   const { bitAccount, setBitAccount } = useState();
   //const dotbit = createInstance();
 
+  // close if the esc key is pressed
+  useEffect(() => {
+    const keyHandler = ({ keyCode }) => {
+      if (!dropdownOpen || keyCode !== 27) return;
+      setDropdownOpen(false);
+    };
+    document.addEventListener("keydown", keyHandler);
+    return () => document.removeEventListener("keydown", keyHandler);
+  });
+
+  const hanldeChangeProject = function (project) {
+    if (currentProjectId === project.projectId) return;
+    dispatch(setCurrentProjectId(project.projectId));
+    setDropdownOpen(false);
+  };
+
+  async function handleLogout() {
+    disconnect();
+    window.location.href = `${location.origin}`;
+  }
+
+  useEffect(() => {
+    // dotbit.accountInfo(address).then((d) => {
+    //   setBitAccount(d.account_alias)
+    // })
+  }, [bitAccount]);
+
+  const Content = () => (
+    <div className="-mx-6 lg:-mx-3 lg:w-[330px]">
+      <div className="relative flex items-center justify-center w-full px-6 pb-2.5 shadow-c9">
+        <div className="flex h-full">
+          <NetWork />
+          <span className="text-[18px] lg:leading-[20px] text-[#333]">{shortAddress(userStore?.address)}</span>
+        </div>
+
+        <div className="absolute top-[-3px] flex items-center justify-end right-6">
+          <div
+            onClick={handleLogout}
+            className="cursor-pointer w-6 h-6 bg-[#ECF1FF] rounded-lg flex items-center justify-center"
+          >
+            <img src={closeIcon} />
+          </div>
+        </div>
+      </div>
+
+      <Link to="/built" onClick={() => setDropdownOpen(false)}>
+        <div className="px-3 text-center py-2 mt-4 mb-3 bg-[#f2f2f2] mx-2.5 rounded-lg text-[#999] hover:text-[#333] text-[16px] leading-[24px]">
+          My social impact NFT collectives
+        </div>
+      </Link>
+    </div>
+  );
+  const Avator = () => (
+    <div
+      className="flex items-center cursor-pointer"
+      onClick={() => {
+        setDropdownOpen(true);
+        setExpaned(false);
+      }}
+    >
+      <div
+        className={clsx(
+          "w-9 h-9 lg:w-8 lg:h-8 rounded-full  flex justify-center overflow-hidden items-center mr-2 shadow-c9",
+          dropdownOpen ? "bg-[#0049FF]" : "bg-[#e6e6e6]"
+        )}
+      >
+        <img src={userStore?.profileImageUrl} className="w-full" />
+      </div>
+      <span
+        className={clsx(
+          "hidden lg:block text-[14px] leading-[22px]",
+          clsx(dropdownOpen ? "text-[#0049FF]" : "text-[#333]")
+        )}
+      >
+        {shortAddress(userStore?.address)}
+      </span>
+    </div>
+  );
   return (
-    <Link to="/built" className="relative z-10 inline-flex items-center h-10 rounded-full shadow-c2">
-      <div className="mx-5 text-right text-black hover:text-[#333] text-xs leading-none">
-        <p className="mb-0.5">{shortAddress(address)}</p>
-        <p>My social impact NFT collectives</p>
-      </div>
-      <div className={clsx("h-10 w-10  rounded-full  flex justify-center overflow-hidden items-center")}>
-        <img src={userStore?.profileImageUrl} className="object-cover w-full h-full" />
-      </div>
-    </Link>
+    <div className="relative inline-flex">
+      <Popover
+        open={dropdownOpen}
+        // open
+        content={<Content />}
+        placement="bottomRight"
+        onOpenChange={(v) => setDropdownOpen(v)}
+      >
+        <Avator />
+      </Popover>
+    </div>
   );
 }
 
