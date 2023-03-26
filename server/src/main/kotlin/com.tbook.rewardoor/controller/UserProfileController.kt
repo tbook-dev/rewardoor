@@ -1,14 +1,14 @@
 package com.tbook.rewardoor.controller
 
-import com.tbook.rewardsphere.model.NFT
-import com.tbook.rewardsphere.model.TwitterUser
-import com.tbook.rewardsphere.service.TwitterInfoService
+import com.tbook.rewardoor.model.NFT
+import com.tbook.rewardoor.model.TwitterUser
+import com.tbook.rewardoor.service.TwitterInfoService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.data.redis.core.RedisTemplate
-import com.tbook.rewardsphere.service.NextIdService
-import com.tbook.rewardsphere.service.RSS3Service
+import com.tbook.rewardoor.service.NextIdService
+import com.tbook.rewardoor.service.RSS3Service
 
 
 @RestController

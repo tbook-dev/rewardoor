@@ -77,7 +77,8 @@ class TwitterInfoService() {
         tweetId: String,
         bearerToken: String,
         fragmentsNum: Int,
-        topN: Int
+        topN: Int,
+        incentiveRuleCode: Int
     ): List<TwitterUser> {
 //        val url =
 //            URL("$BASE_URL/tweets/$tweetId?expansions=referenced_tweets.id.author_id&tweet.fields=conversation_id,created_at,in_reply_to_user_id,referenced_tweets,text,public_metrics")
@@ -100,10 +101,15 @@ class TwitterInfoService() {
         for (i in 0 until dataArray.length()) {
             val data = dataArray.getJSONObject(i)
             val like_count = data.getJSONObject("public_metrics").getInt("like_count")
+            val impression_count = data.getJSONObject("public_metrics").getInt("impression_count")
             val user_id = data.getString("author_id")
             val create_date = data.getString("created_at")
             val user_id_with_date = user_id + "_" + create_date
-            uidLikeCountMap.put(user_id_with_date, like_count)
+            if(incentiveRuleCode == 1) {
+                uidLikeCountMap[user_id_with_date] = like_count
+            } else {
+                uidLikeCountMap[user_id_with_date] = impression_count
+            }
         }
         val sortedEntries = uidLikeCountMap.entries.sortedByDescending { it.value }.take(topN) //取前10
         println(sortedEntries)
