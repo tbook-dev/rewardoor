@@ -42,8 +42,8 @@
  */
 
 require('dotenv').config();
-const { MUMBAI_PROVIDER, POLYGON_PROVIDER, OP_PROVIDER, ETHERSCAN_KEY, POLYGONSCAN_KEY } = process.env;
-console.log({MUMBAI_PROVIDER, POLYGON_PROVIDER, OP_PROVIDER});
+const { MUMBAI_PROVIDER, POLYGON_PROVIDER, OP_PROVIDER_GOERLI, ETHERSCAN_KEY, POLYGONSCAN_KEY, OP_PROVIDER_MAIN } = process.env;
+console.log({MUMBAI_PROVIDER, POLYGON_PROVIDER, OP_PROVIDER_GOERLI});
 // const HDWalletProvider = require('@truffle/hdwallet-provider');
 // truffle-config.js
 
@@ -72,7 +72,7 @@ module.exports = {
       skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
     },
     optimistic_goerli: {
-      provider: () => new HDWalletProvider(privateKey, OP_PROVIDER),
+      provider: () => new HDWalletProvider(privateKey, OP_PROVIDER_GOERLI),
       network_id: 420,
       gas: 10021970, //from ganache-cli output
       gasPrice: 1000000000, //From ganache-cli output
@@ -81,10 +81,19 @@ module.exports = {
       timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
       skipDryRun: false     // Skip dry run before migrations? (default: false for public nets )
     },
+    optimistic: {
+      provider: () => new HDWalletProvider(privateKey, OP_PROVIDER_MAIN),
+      network_id: 10,
+      gas: 10021970, //from ganache-cli output
+      gasPrice: 1000000, //From ganache-cli output
+      confirmations: 2,    // # of confs to wait between deployments. (default: 0)
+      timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
+      skipDryRun: false     // Skip dry run before migrations? (default: false for public nets )
+    },
   },
   compilers: {             // Configure your compilers
     solc: {
-      version: "0.8.4",    // Fetch exact version from solc-bin (default: truffle's version)
+      version: "0.8.15",    // Fetch exact version from solc-bin (default: truffle's version)
       settings: {          // See the solidity docs for advice about optimization and evmVersion
         optimizer: {
           enabled: true,
