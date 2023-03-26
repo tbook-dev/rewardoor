@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.tbook</groupId>
-    <artifactId>RewardSphere</artifactId>
+    <artifactId>Rewardoor</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>RewardSphere-server</name>
-    <description>RewardSphere-server</description>
+    <name>Rewardoor-server</name>
+    <description>Rewardoor-server</description>
     <properties>
         <java.version>11</java.version>
         <kotlin.version>1.6.21</kotlin.version>

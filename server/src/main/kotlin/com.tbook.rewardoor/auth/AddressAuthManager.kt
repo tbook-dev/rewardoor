@@ -1,6 +1,6 @@
 package com.tbook.rewardoor.auth
 
-import com.tbook.rewardsphere.utils.Signs
+import com.tbook.rewardoor.utils.Signs
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Component
