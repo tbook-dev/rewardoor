@@ -1,15 +1,10 @@
 import icon from "./creator.svg";
 
-export default function ({
-  img = "https://cdn.pixabay.com/photo/2023/01/05/22/35/flower-7700011_1280.jpg",
-  name,
-  createTime,
-  extral,
-}) {
+export default function ({ img, name, createTime, extral }) {
   return (
     <div className="flex justify-between text-[14px]">
       <div className="flex">
-        <div className="flex justify-center items-center w-12 h-12 overflow-hidden rounded-full mr-4">
+        <div className="flex items-center justify-center w-12 h-12 mr-4 overflow-hidden rounded-full">
           <img src={img} className="w-full" />
         </div>
         <div>

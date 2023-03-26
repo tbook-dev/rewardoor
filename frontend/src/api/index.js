@@ -29,7 +29,7 @@ const saveToLs = (list) => {
     const twId = v.rawMetadata?.attributes?.find((v) => v.traitType === "twit_id")?.value;
     const twUrl = v.rawMetadata?.image;
     const contract = v.contract?.address;
-    const opensea = `https://opensea.io/zh-CN/assets/optimism/${contract}/${id}`;
+    const opensea = `https://opensea.io/assets/optimism/${contract}/${id}`;
     localStorage.setItem(`nftId_${id}`, JSON.stringify({ twUrl, opensea, contract, twId, nftId: id }));
   });
 };
