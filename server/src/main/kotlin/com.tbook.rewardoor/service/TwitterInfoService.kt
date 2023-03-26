@@ -100,10 +100,11 @@ class TwitterInfoService() {
         for (i in 0 until dataArray.length()) {
             val data = dataArray.getJSONObject(i)
             val like_count = data.getJSONObject("public_metrics").getInt("like_count")
+            val impression_count = data.getJSONObject("public_metrics").getInt("impression_count")
             val user_id = data.getString("author_id")
             val create_date = data.getString("created_at")
             val user_id_with_date = user_id + "_" + create_date
-            uidLikeCountMap.put(user_id_with_date, like_count)
+            uidLikeCountMap.put(user_id_with_date, impression_count)
         }
         val sortedEntries = uidLikeCountMap.entries.sortedByDescending { it.value }.take(topN) //取前10
         println(sortedEntries)
