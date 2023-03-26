@@ -95,6 +95,16 @@ class TwitterInfoService() {
             it.readText()
         }
         val json = JSONObject(response)
+        if (json.getJSONObject("meta").get("result_count") == 0) {
+            val resultMap = mutableMapOf<String, TwitterUser>()
+            val authorIdWithDate = getTweetUser(tweetId, bearerToken)
+            val authorId = authorIdWithDate.split("_")[0]
+            val creatorUser = getTwitterUserService(address, authorId, bearerToken)
+            creatorUser.fragmentsShare = if (100 - fragmentsNum > 0) 100 - fragmentsNum else 0
+            creatorUser.commentDate = getDateTime(authorIdWithDate.split("_")[1])
+            resultMap.put(authorId, creatorUser)
+            return resultMap.values.toList()
+        }
 //        println(response.toString())
         val dataArray = json.getJSONArray("data")
         val uidLikeCountMap = mutableMapOf<String, Int>()
