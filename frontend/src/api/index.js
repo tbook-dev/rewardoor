@@ -1,15 +1,16 @@
 import request from "./request";
 import tw from "@/images/tw.png";
-import defaultAvatar from "@/images/default.png";
+// import defaultAvatar from "@/images/default.png";
 import { Network, Alchemy } from "alchemy-sdk";
+import { readAttestation } from "@eth-optimism/atst";
 
-const contractAddresses = "0xACdE17C1A595Ae2Cf12605a157Ae8Ad5Ddf8953F".toLocaleLowerCase();
+const contractAddresses = "0x965DfEac842166A67c255AAE63925098FBF0080d".toLocaleLowerCase();
 
 export const host = "https://rs-service.fly.dev";
 
 const settings = {
-  apiKey: "sZe_qnmEekZOmG0pEqdl0LxMeGxNMkJD",
-  network: Network.MATIC_MUMBAI,
+  apiKey: "8s2Swo7n62XYd3ApkcnentYuEi5BI1Yj",
+  network: Network.OPT_MAINNET,
 };
 
 const alchemy = new Alchemy(settings);
@@ -28,7 +29,7 @@ const saveToLs = (list) => {
     const twId = v.rawMetadata?.attributes?.find((v) => v.traitType === "twit_id")?.value;
     const twUrl = v.rawMetadata?.image;
     const contract = v.contract?.address;
-    const opensea = `https://testnets.opensea.io/assets/mumbai/${contract}/${id}`;
+    const opensea = `https://opensea.io/zh-CN/assets/optimism/${contract}/${id}`;
     localStorage.setItem(`nftId_${id}`, JSON.stringify({ twUrl, opensea, contract, twId, nftId: id }));
   });
 };
@@ -49,14 +50,21 @@ export const getUserInfo = async function (address) {
   // await deloay(1000);
   try {
     const user = await request(`${host}/userInfo?address=${address}`);
+    const readCreatorAddr = "0x60c5C9c98bcBd0b0F2fD89B24c16e533BaA8CdA3";
+    const aboutAddr = "0x2335022c740d17c2837f9C884Bfe4fFdbf0A95D5";
+    const key = "optimist.base-uri";
+    const userName = await readAttestation(readCreatorAddr, aboutAddr, key, "string");
+    console.log(`According to ${readCreatorAddr} the ${key} for ${aboutAddr} is ${userName}`);
+    console.log({ userName, user });
     return {
       user,
     };
   } catch (err) {
+    console.log(err);
     return {
       user: {
         address,
-        profileImageUrl: defaultAvatar,
+        // profileImageUrl: defaultAvatar,
       },
     };
   }

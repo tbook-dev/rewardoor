@@ -12,19 +12,15 @@ const divideRulesOptions = [
   },
 ];
 
-export default function ({
-  onMint,
-  onCancel,
-  address = "0x624f313007Ca80eAE6CD1536362721F479558e3F",
-  maxNft = 100,
-  loading,
-}) {
+export default function ({ onMint, onCancel, address, maxNft = 100, loading }) {
   const [form] = Form.useForm();
 
   return (
     <div>
       <div className="text-[#333] mb-6">
-        <h1 className="text-[56px] leading-[64px] mb-10 text-center"><span className="font-bold text-colorful">NFT Fragments Assignment</span></h1>
+        <h1 className="text-[56px] leading-[64px] mb-10 text-center">
+          <span className="font-bold text-colorful">NFT Fragments Assignment</span>
+        </h1>
         <h2 className="h-10 border rounded-lg font-medium shadow-[0px_0px_4px_rgba(0, 0, 0, 0.2)] flex justify-center items-center">
           <Paragraph copyable={{ text: address }} style={{ marginBottom: 0 }}>
             {shortAddress(address)}
@@ -80,19 +76,11 @@ export default function ({
             <DatePicker format={timeFormat} showTime className="w-full" />
           </Form.Item>
 
-          <Form.Item
-            wrapperCol={{ span: 24 }}
-            className="flex justify-center !mt-7"
-          >
+          <Form.Item wrapperCol={{ span: 24 }} className="flex justify-center !mt-7">
             <Button className="w-[132px] mr-8" onClick={onCancel}>
               Cancel
             </Button>
-            <Button
-              loading={loading}
-              type="primary"
-              htmlType="submit"
-              className="w-[132px] button-colorful"
-            >
+            <Button loading={loading} type="primary" htmlType="submit" className="w-[132px] button-colorful">
               Create
             </Button>
           </Form.Item>

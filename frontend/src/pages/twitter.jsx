@@ -105,6 +105,7 @@ export default function () {
         <MintStep3
           loading={createLoading}
           maxNft={formValues?.current?.nftNum}
+          address={address}
           onMint={handleMintStep3}
           onCancel={() => {
             navigate("/");
