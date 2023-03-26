@@ -30,9 +30,17 @@ class IncentiveController(
     fun getIncentiveRules(
         @RequestParam("address") address: String,
         @RequestParam("twitterId") twitterId: String,
-        @RequestParam("fragmentsNum") fragmentsNum: Int
+        @RequestParam("fragmentsNum") fragmentsNum: Int,
+        @RequestParam("incentiveRuleCode") incentiveRuleCode: Int
     ): List<TwitterUser> {
-        return twitterInfoService.getCommentsUserList(address, twitterId, bearerToken, fragmentsNum, 10)
+        return twitterInfoService.getCommentsUserList(
+            address,
+            twitterId,
+            bearerToken,
+            fragmentsNum,
+            10,
+            incentiveRuleCode
+        )
     }
 
 }
