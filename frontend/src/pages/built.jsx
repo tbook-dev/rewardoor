@@ -70,7 +70,7 @@ export default function () {
         </div>
 
         <div className="mt-[100px] flex-auto">
-          <h2 className="text-[14px] leading-[21px] mb-4 font-bold">built</h2>
+          <h2 className="text-[14px] leading-[21px] mb-4 font-bold">NFT collectives</h2>
 
           <div className="w-16 h-[2px] mb-8 bg-black" />
 

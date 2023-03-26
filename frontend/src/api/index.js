@@ -49,21 +49,31 @@ export const getUserInfo = async function (address) {
   // console.log("getUserInfo");
   // await deloay(1000);
   try {
-    const user = await request(`${host}/userInfo?address=${address}`);
-    const readCreatorAddr = "0x60c5C9c98bcBd0b0F2fD89B24c16e533BaA8CdA3";
-    const aboutAddr = "0x2335022c740d17c2837f9C884Bfe4fFdbf0A95D5";
-    const key = "optimist.base-uri";
-    const userName = await readAttestation(readCreatorAddr, aboutAddr, key, "string");
+    const user = (await request(`${host}/userInfo?address=${address}`)) || {};
+    const readCreatorAddr = "0x3BEfF95bBB844015372075AaE6fE8Ff1E0DE5d27";
+    const aboutAddr = address;
+    const key = "rewardoor.twitter.handle";
+    const userName = await readAttestation(
+      readCreatorAddr,
+      aboutAddr,
+      key,
+      "string",
+      "0xCC1e763FC0eE8010E225aA0b51f378051Ea3B614"
+    );
     console.log(`According to ${readCreatorAddr} the ${key} for ${aboutAddr} is ${userName}`);
     console.log({ userName, user });
     return {
-      user,
+      user: {
+        ...user,
+        userName: userName || user.userName,
+      },
     };
   } catch (err) {
     console.log(err);
     return {
       user: {
         address,
+        userName,
         // profileImageUrl: defaultAvatar,
       },
     };

@@ -35,8 +35,9 @@ function DropdownProfile() {
 
   return (
     <Link to="/built" className="relative z-10 inline-flex items-center h-10 rounded-full shadow-c2">
-      <div className="mx-5  text-black hover:text-[#333] text-[12px] leading-[16px]">
-        My social impact NFT collectives
+      <div className="mx-5 text-right text-black hover:text-[#333] text-xs leading-none">
+        <p className="mb-0.5">{shortAddress(address)}</p>
+        <p>My social impact NFT collectives</p>
       </div>
       <div className={clsx("h-10 w-10  rounded-full  flex justify-center overflow-hidden items-center")}>
         <img src={userStore?.profileImageUrl} className="object-cover w-full h-full" />
