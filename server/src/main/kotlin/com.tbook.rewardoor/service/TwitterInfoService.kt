@@ -77,8 +77,8 @@ class TwitterInfoService() {
         tweetId: String,
         bearerToken: String,
         fragmentsNum: Int,
-        topN: Int,
-        incentiveRuleCode: Int
+        topN: Int
+//        incentiveRuleCode: Int
     ): List<TwitterUser> {
 //        val url =
 //            URL("$BASE_URL/tweets/$tweetId?expansions=referenced_tweets.id.author_id&tweet.fields=conversation_id,created_at,in_reply_to_user_id,referenced_tweets,text,public_metrics")
@@ -95,6 +95,16 @@ class TwitterInfoService() {
             it.readText()
         }
         val json = JSONObject(response)
+        if (json.getJSONObject("meta").get("result_count") == 0) {
+            val resultMap = mutableMapOf<String, TwitterUser>()
+            val authorIdWithDate = getTweetUser(tweetId, bearerToken)
+            val authorId = authorIdWithDate.split("_")[0]
+            val creatorUser = getTwitterUserService(address, authorId, bearerToken)
+            creatorUser.fragmentsShare = if (100 - fragmentsNum > 0) 100 - fragmentsNum else 0
+            creatorUser.commentDate = getDateTime(authorIdWithDate.split("_")[1])
+            resultMap.put(authorId, creatorUser)
+            return resultMap.values.toList()
+        }
 //        println(response.toString())
         val dataArray = json.getJSONArray("data")
         val uidLikeCountMap = mutableMapOf<String, Int>()
@@ -105,11 +115,11 @@ class TwitterInfoService() {
             val user_id = data.getString("author_id")
             val create_date = data.getString("created_at")
             val user_id_with_date = user_id + "_" + create_date
-            if(incentiveRuleCode == 1) {
-                uidLikeCountMap[user_id_with_date] = like_count
-            } else {
-                uidLikeCountMap[user_id_with_date] = impression_count
-            }
+//            if(incentiveRuleCode == 1) {
+//                uidLikeCountMap[user_id_with_date] = like_count
+//            } else {
+            uidLikeCountMap[user_id_with_date] = impression_count
+//            }
         }
         val sortedEntries = uidLikeCountMap.entries.sortedByDescending { it.value }.take(topN) //取前10
         println(sortedEntries)
