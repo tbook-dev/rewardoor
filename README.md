@@ -11,7 +11,7 @@ Rewardoor aims to build a social impact incentive layer on top of Web 2 and leve
 We want to free users' data and attention value from Web 2 platforms and give control back to the users.  
 In Rewardoor, activity promoters or sponsors can directly reward authentic contributors instead of the twitter platform.  
 To achieve this goal, we have accomplished the following tasks.
- 1. ### Optimism ATTN identity bridge 
+ 1. ### Optimism ATST identity bridge 
 We use Optimism AttestationStation idea to achieve a social identity connetor.  
 [We write our Rewardoor AttestationStation smart contract](https://optimistic.etherscan.io/address/0xCC1e763FC0eE8010E225aA0b51f378051Ea3B614#code) deployed on Optimism Mainnet.  
 We use this contract to connect the blockchain address to a twitter handle, so people could map their offchain identity to their onchain identity. We also mark some twitter behaviors in our AttestationStation contract to the onchain identity.  
